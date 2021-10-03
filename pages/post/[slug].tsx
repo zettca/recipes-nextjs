@@ -11,6 +11,7 @@ type Metadata = {
   title: string;
   description: string;
   tags: string;
+  lang: string;
   date: Date;
   author: string;
 };
@@ -19,16 +20,18 @@ type Props = {
   html: string;
   meta: Metadata;
 };
+
 type Params = {
   slug: string;
 };
 
 const Post: NextPage<Props, Params> = ({ html, meta }) => {
-  const { title, description, author, date, tags } = meta;
+  const { title, description, author, date, tags, lang } = meta;
 
   return (
     <>
       <Head>
+        <html lang={lang} />
         <title>{title}</title>
         <meta title="description" content={description} />
         <meta name="keywords" content={tags} />
@@ -52,8 +55,12 @@ const Post: NextPage<Props, Params> = ({ html, meta }) => {
           </Grid>
         </Grid>
 
-        <Grid container item>
-          <div dangerouslySetInnerHTML={{ __html: html }} />
+        <hr />
+
+        <Grid container>
+          <Grid item style={{ overflow: "hidden" }}>
+            <div dangerouslySetInnerHTML={{ __html: html }} />
+          </Grid>
         </Grid>
       </Container>
     </>
@@ -64,10 +71,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const slugs = readDirSlugs("_posts");
   const paths = slugs.map((slug) => ({ params: { slug } }));
 
-  return {
-    paths,
-    fallback: false,
-  };
+  return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<Props, Params> = async (
@@ -84,10 +88,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async (
   const meta = parsedMd.data as Metadata;
 
   return {
-    props: {
-      html,
-      meta,
-    },
+    props: { html, meta },
   };
 };
 

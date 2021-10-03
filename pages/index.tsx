@@ -34,12 +34,10 @@ const Index: NextPage<Props, Params> = ({ posts = [] }) => {
 export const getStaticProps: GetStaticProps<Props, Params> = async ({
   params,
 }) => {
-  const posts = readDirSlugs("_posts");
+  const posts = readDirSlugs("_posts"); //.filter((slug) => !slug.startsWith("_"));
 
   return {
-    props: {
-      posts,
-    },
+    props: { posts },
   };
 };
 

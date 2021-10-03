@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import Link from "next/link";
 import type { AppProps } from "next/app";
 import {
   CssBaseline,
@@ -7,8 +6,8 @@ import {
   createTheme,
   useMediaQuery,
 } from "@material-ui/core";
-import Toolbar from "components/Toolbar";
-import "../styles/globals.css";
+import Header from "components/Header";
+import "styles/globals.css";
 
 function App({ Component, pageProps }: AppProps) {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
@@ -21,7 +20,7 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Toolbar title="🥘 Recipes" />
+      <Header title="🥘 Recipes 👩‍🍳" />
       <Component {...pageProps} />
     </ThemeProvider>
   );
