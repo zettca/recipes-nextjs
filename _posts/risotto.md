@@ -15,7 +15,7 @@ This is an example of a recipe post. WIP
 1. 200g rice
 2. 600ml water
 3. 2kg awesomeness
-4. 1tg cheese
+4. 1gg cheese
 
 ## Preparation
 
